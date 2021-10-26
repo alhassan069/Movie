@@ -23,23 +23,29 @@
 
         #container {
             display: grid;
-            grid-template-columns: repeat(4, 24%);
+            grid-template-columns: repeat(3, 30%);
             margin: 1%;
-            grid-gap: 1%;
+            grid-gap: 50px 20px;
         }
-
+        
         img {
             width: 60%;
+            margin: auto;
             height: 300px;
         }
 
         #error {
             width: 60%;
+            margin-top: 50px;
+            margin-left: 100px;
             text-align: center;
         }
 
         #recommended {
+            width: 50%;
+            /* margin: auto; */
             background-color: green;
+            font-size: small;
             border-radius: 5px;
             text-align: center;
         }
@@ -91,6 +97,7 @@
 
     function showMovie(Movies) {
         err.innerHTML = null;
+        faw.innerHTML = null;
         Movies.forEach(function (Movie) {
 
             // let ratings = getImdb(Movie.imdbID)
