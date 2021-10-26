@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie</title>
+    <style>
+        /* #navbar {
+            display: flex;
+            justify-content: space-between;
+            padding-left: 4%;
+            padding-right: 4%;
+            border: solid 1px black;
+            text-decoration: none;
+        } */
+
+        #container {
+            display: grid;
+            grid-template-columns: repeat(4, 25%);
+            margin: 1%;
+            grid-gap: 1%;
+        }
+
+        img {
+            width: 60%;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar">
+        <h1>Movie Website</h1>
+        <div>
+            <input type="text" id="movie" placeholder="Enter movie Name">
+            <button onclick="getMovie()">Get Movie</button>
+        </div>
+
+    </div>
+
+    <div id="container"></div>
+</body>
+<script>
+
+    async function getMovie() {
+        var movie = document.getElementById("movie").value;
+        try {
+            let res = await fetch(`http://www.omdbapi.com/?apikey=64415cf&s=${movie}`);
+            let data = await res.json();
+            showMovie(data.Search);
+            // console.log(data.Search);
+        } catch (e) {
+            console.log("got an error in api request    ", e)
+        }
+    }
+
+    // function showMovie(Movie) {
+    //     container.innerHTML = null;
+    //     let name = document.createElement("p");
+    //     name.innerText = Movie.name;
+    //     let temp = document.createElement("p");
+    //     temp.innerText = Math.round(Movie.main.temp - 273) + "°C";
+    //     container.append(name, temp);
+
+
+    // }
+
+    function showMovie(Movies) {
+        Movies.forEach(function (Movie) {
+            // console.log(Movie)
+            let div = document.createElement("div");
+
+            let img = document.createElement("img")
+            img.src = Movie.Poster;
+            let name = document.createElement("p")
+            name.innerText = Movie.Title;
+            let Year = document.createElement("p")
+            Year.innerText = Movie.Year;
+
+            div.append(img, name, Year);
+
+            let faw = document.getElementById("container");
+            faw.append(div);
+        })
+    }
+
+
+
+
+
+
+</script>
+
+</html>
